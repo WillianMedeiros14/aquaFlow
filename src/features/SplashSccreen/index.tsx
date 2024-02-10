@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { DropLogoSvg } from "@assets/icons";
 
@@ -11,7 +11,7 @@ import LottieView from "lottie-react-native";
 import { LoadSplashAnimation } from "@assets/animations";
 import { scale } from "react-native-size-matters";
 
-import { Dimensions } from "react-native";
+import { Dimensions, StatusBar } from "react-native";
 import { WaveSplashSvg } from "@assets/vector";
 
 const { width } = Dimensions.get("window");
@@ -19,6 +19,11 @@ const { width } = Dimensions.get("window");
 export function SplashScreen() {
   return (
     <S.Container>
+      <StatusBar
+        translucent
+        barStyle={"light-content"}
+        backgroundColor={"transparent"}
+      />
       <S.Content>
         <S.ContainerText>
           <DropLogoSvg />

@@ -20,6 +20,12 @@ import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { SplashScreen } from "@features/SplashSccreen";
 import { useEffect, useState } from "react";
 import { SignIn } from "@features/auth/SignIn";
+import { NavigationContainer } from "@react-navigation/native";
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from "react-native-safe-area-context";
+import Onboarding from "@features/onboarding/screens/Onboarding";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -69,8 +75,12 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <SignIn />
-      <StatusBar style="auto" />
+      <NavigationContainer>
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <Onboarding />
+          <StatusBar style="auto" />
+        </SafeAreaProvider>
+      </NavigationContainer>
     </ThemeProvider>
   );
 };
