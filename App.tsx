@@ -16,8 +16,12 @@ import {
 
 import theme from "./src/theme/theme/theme";
 import { ThemeProvider } from "styled-components";
+import { gestureHandlerRootHOC } from "react-native-gesture-handler";
+import { SplashScreen } from "@features/SplashSccreen";
+import { useEffect, useState } from "react";
+import { SignIn } from "@features/auth/SignIn";
 
-export default function App() {
+const App = () => {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
@@ -29,36 +33,46 @@ export default function App() {
     Inter_700Bold,
   });
 
-  if (!fontsLoaded) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: theme.colors.primary,
-        }}
-      >
-        <ActivityIndicator color={theme.colors.white} />
-      </View>
-    );
+  const [isLoading, setIsLoading] = useState(true);
+
+  async function loadUser() {
+    setIsLoading(true);
+    try {
+      // const storedUser = await SecureStore.getItemAsync("alimenteSeBem.user");
+      // if (storedUser) {
+      //   // const user = JSON.parse(storedUser) as IUser;
+      //   // setUser(user, true);
+      //   setIsLoading(false);
+      // } else {
+      //   setIsLoading(false);
+      // }
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 10000);
+    } catch (error) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 10000);
+    }
+  }
+
+  useEffect(() => {
+    loadUser();
+    return () => {
+      loadUser();
+    };
+  }, []);
+
+  if (!fontsLoaded || isLoading) {
+    return <SplashScreen />;
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
+      <SignIn />
+      <StatusBar style="auto" />
     </ThemeProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default gestureHandlerRootHOC(App);
