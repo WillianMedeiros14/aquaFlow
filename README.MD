@@ -9,10 +9,9 @@
 Aplicação construída com **[React Native](https://reactnative.dev/)**. <br />
 O objetivo da apliacação é...
 
-Este projeto foi desenvolvido tecnicamente por **Willian Medeiros** (Desenvolvedor), **Jonas Moreira Barbosa** (Desenvolvedor) : [linkedin]( https://www.linkedin.com/in/jonas-moreira28 ) - [github]( https://github.com/JonasMoreira5/JonasMoreira5 ), **Frankson Leal** (Desenvolvedor), **Vitor Vasconcelos** (Design), como projeto final da Disciplina de Engenharia de Software B do Instituto de Ciências Exatas e Tecnologia - ICET-UFAM.
-
 ## 🚀 Informações
 
+Este projeto foi desenvolvido tecnicamente por **Willian Medeiros** (Desenvolvedor), **Jonas Moreira Barbosa** (Desenvolvedor) : [linkedin]( https://www.linkedin.com/in/jonas-moreira28 ) - [github]( https://github.com/JonasMoreira5/JonasMoreira5 ), **Frankson Leal** (Desenvolvedor), **Vitor Vasconcelos** (Design), como projeto final da Disciplina de Engenharia de Software B do Instituto de Ciências Exatas e Tecnologia - ICET-UFAM.
 ## 🎲 Executar aplicação
 
 ### Requisítos antes de executar
