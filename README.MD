@@ -4,10 +4,11 @@
 
 <br>
 
-## 💻 Projeto
+## 💻 Sobre o Projeto
 
 Aplicação construída com **[React Native](https://reactnative.dev/)**. <br />
 O objetivo da apliacação é...
+
 
 ## 🚀 Informações
 
