@@ -29,7 +29,7 @@ import {
 import StepIndicator from "../components/StepIndicator";
 import { Spacer } from "@global/components/Spacer";
 import Text from "@global/components/Text";
-import { Button } from "@global/Button";
+import { Button } from "@global/components/Button";
 
 const { width, height } = Dimensions.get("window");
 

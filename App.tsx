@@ -19,13 +19,18 @@ import { ThemeProvider } from "styled-components";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { SplashScreen } from "@features/SplashSccreen";
 import { useEffect, useState } from "react";
-import { SignIn } from "@features/auth/SignIn";
+
 import { NavigationContainer } from "@react-navigation/native";
 import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
 import Onboarding from "@features/onboarding/screens/Onboarding";
+import SignIn from "@features/auth/SignIn";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@global/config/react-query";
+import Toast from "react-native-toast-message";
+import SignUp from "@features/auth/SignUp";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -75,12 +80,16 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <Onboarding />
-          <StatusBar style="auto" />
-        </SafeAreaProvider>
-      </NavigationContainer>
+      <QueryClientProvider client={queryClient}>
+        <NavigationContainer>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            {/* <Onboarding /> */}
+            <SignUp />
+            <StatusBar style="auto" />
+            <Toast />
+          </SafeAreaProvider>
+        </NavigationContainer>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
