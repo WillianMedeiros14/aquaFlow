@@ -31,6 +31,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@global/config/react-query";
 import Toast from "react-native-toast-message";
 import SignUp from "@features/auth/SignUp";
+import Routes from "routes";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -83,9 +84,9 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <NavigationContainer>
           <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-            {/* <Onboarding /> */}
-            <SignUp />
             <StatusBar style="auto" />
+
+            <Routes />
             <Toast />
           </SafeAreaProvider>
         </NavigationContainer>
