@@ -11,7 +11,7 @@ import {
 } from "./styles";
 
 import { useTheme } from "styled-components";
-import { useNavigation } from "@react-navigation/native";
+import { CommonActions, useNavigation } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Animated, {
   interpolate,
@@ -30,6 +30,7 @@ import StepIndicator from "../components/StepIndicator";
 import { Spacer } from "@global/components/Spacer";
 import Text from "@global/components/Text";
 import { Button } from "@global/components/Button";
+import { AuthScreenNavigationProp } from "routes/auth.routes";
 
 const { width, height } = Dimensions.get("window");
 
@@ -61,7 +62,7 @@ export default function Onboarding() {
   const theme = useTheme();
 
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<AuthScreenNavigationProp>();
   const positionX = useSharedValue(0);
 
   const valueOpacityJump = useSharedValue(1);
@@ -97,8 +98,12 @@ export default function Onboarding() {
   };
 
   function handleJump() {
-    console.log("proxima tela");
-    // navigation.navigate("SignIn");
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: "SignIn" }],
+      })
+    );
   }
 
   const jumpButtonVisibility = useAnimatedStyle(() => {
@@ -113,7 +118,7 @@ export default function Onboarding() {
     <Container>
       <StatusBar
         translucent
-        barStyle={"light-content"}
+        barStyle={"dark-content"}
         backgroundColor={theme.colors.white}
       />
 

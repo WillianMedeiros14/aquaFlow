@@ -16,6 +16,8 @@ import Text from "@global/components/Text";
 import { Spacer } from "@global/components/Spacer";
 import { Header } from "@global/components/Header";
 import { Button } from "@global/components/Button";
+import { AuthScreenNavigationProp } from "routes/auth.routes";
+import { useNavigation } from "@react-navigation/native";
 
 const { height } = Dimensions.get("window");
 
@@ -46,6 +48,8 @@ export default function LayoutSignInAndSignUp({
 }: Props) {
   const insets = useSafeAreaInsets();
 
+  const navigation = useNavigation<AuthScreenNavigationProp>();
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -56,7 +60,10 @@ export default function LayoutSignInAndSignUp({
 
           {isHeader && (
             <>
-              <Header title={titleHeader} onPressLeft={() => {}} />
+              <Header
+                title={titleHeader}
+                onPressLeft={() => navigation.goBack()}
+              />
               <Spacer height={50} />
             </>
           )}

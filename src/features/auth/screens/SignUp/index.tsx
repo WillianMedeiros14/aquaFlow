@@ -1,17 +1,18 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Controller } from "react-hook-form";
-import LayoutSignInAndSignUp from "../layouts/LayoutSignInAndSignUp";
+import LayoutSignInAndSignUp from "../../layouts/LayoutSignInAndSignUp";
 import { Spacer } from "@global/components/Spacer";
 import { TextInput } from "@global/components/TextInput";
-import { ISignUp } from "../types/auth";
+import { ISignUp } from "../../types/auth";
 import * as S from "./styles";
-import { ButtonOptionAuth } from "../components/ButtonOptionAuth";
-import { useSignUp } from "../hooks/useSignUp";
+import { ButtonOptionAuth } from "../../components/ButtonOptionAuth";
+import { useSignUp } from "../../hooks/useSignUp";
 import Text from "@global/components/Text";
+import { AuthScreenNavigationProp } from "routes/auth.routes";
 
 export default function SignUp() {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<AuthScreenNavigationProp>();
 
   const { isPending, control, handleSubmit, errors } = useSignUp();
 
@@ -33,7 +34,7 @@ export default function SignUp() {
         <ButtonOptionAuth
           textLeft="Já tem uma conta?"
           textRight="Entre"
-          onPress={() => {}}
+          onPress={() => navigation.navigate("SignIn")}
         />
 
         <Spacer height={10} />

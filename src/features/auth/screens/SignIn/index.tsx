@@ -3,21 +3,23 @@ import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { Controller } from "react-hook-form";
-import LayoutSignInAndSignUp from "../layouts/LayoutSignInAndSignUp";
+import LayoutSignInAndSignUp from "../../layouts/LayoutSignInAndSignUp";
 import { Spacer } from "@global/components/Spacer";
 import { TextInput } from "@global/components/TextInput";
-import { useSignIn } from "../hooks/useSignIn";
-import { ISignIn } from "../types/auth";
+import { useSignIn } from "../../hooks/useSignIn";
+import { ISignIn } from "../../types/auth";
 
 import * as S from "./styles";
 import { FacebookSvg, GoogleSvg } from "@assets/icons";
 import { scale } from "react-native-size-matters";
 import { HEIGHT } from "@features/onboarding/screens/Onboarding";
 import Text from "@global/components/Text";
-import { ButtonOptionAuth } from "../components/ButtonOptionAuth";
+import { ButtonOptionAuth } from "../../components/ButtonOptionAuth";
+import { AuthScreenNavigationProp } from "routes/auth.routes";
+import { StatusBar } from "react-native";
 
 export default function SignIn() {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<AuthScreenNavigationProp>();
 
   const { isPending, control, handleSubmit, errors } = useSignIn();
 
@@ -65,7 +67,7 @@ export default function SignIn() {
         <ButtonOptionAuth
           textLeft="Não possui uma conta?"
           textRight="Inscrever-se"
-          onPress={() => {}}
+          onPress={() => navigation.navigate("SignUp")}
         />
 
         <Spacer height={10} />
@@ -83,6 +85,11 @@ export default function SignIn() {
       isLoad={isPending}
       componentBottom={<ComponentBottom />}
     >
+      <StatusBar
+        translucent
+        barStyle={"dark-content"}
+        backgroundColor={"white"}
+      />
       <Controller
         control={control}
         render={({ field: { onChange, value } }) => (
