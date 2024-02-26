@@ -1,6 +1,7 @@
 export const colors = {
   primary: "#5DCCFC",
   blueSecondary: "#0F80FD",
+  backGroundEditInput: "#EAF8FE",
   title: "#303030",
   white: "#FFFFFF",
   black: "#000000",

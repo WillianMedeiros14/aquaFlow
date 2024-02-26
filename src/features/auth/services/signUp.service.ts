@@ -31,7 +31,7 @@ export async function signUpService(data: ISignUpInServiceProps) {
         acceptTerms: data.acceptTerms,
       });
 
-      return docRef;
+      return response;
     } catch (error) {
       console.log("Error dentro do banco");
 

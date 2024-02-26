@@ -6,6 +6,7 @@ export const Container = styled(SafeAreaView)`
   flex-direction: row;
   justify-content: space-between;
   position: relative;
+  padding-top: 15px;
 `;
 
 export const Button = styled.TouchableOpacity`

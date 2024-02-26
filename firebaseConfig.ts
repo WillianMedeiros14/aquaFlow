@@ -8,11 +8,13 @@ import {
   addDoc,
   setDoc,
   doc,
+  getDoc,
 } from "firebase/firestore";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  updateEmail,
 } from "firebase/auth";
 
 const firebaseConfig = {

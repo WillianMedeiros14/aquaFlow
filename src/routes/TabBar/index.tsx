@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   Text,
   Dimensions,
   SafeAreaView,
+  Keyboard,
 } from "react-native";
 import { IconsTabBar } from "./IconsTab";
 import theme from "@theme/theme/theme";
@@ -19,6 +20,7 @@ const ANIMATED_PART_HEIGHT = 5;
 
 const TabBar = ({ state, descriptors, navigation }) => {
   const animationHorizontalValue = useRef(new Animated.Value(0)).current;
+  const [keyboardStatus, setKeyboardStatus] = useState(false);
 
   const animate = (index) => {
     Animated.spring(animationHorizontalValue, {
@@ -31,8 +33,24 @@ const TabBar = ({ state, descriptors, navigation }) => {
     animate(state.index);
   }, [state.index]);
 
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", () => {
+      setKeyboardStatus(true);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardStatus(false);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
+
   return (
-    <SafeAreaView style={[styles.container, { display: "flex" }]}>
+    <SafeAreaView
+      style={[styles.container, { display: keyboardStatus ? "none" : "flex" }]}
+    >
       <View
         style={{
           flexDirection: "row",

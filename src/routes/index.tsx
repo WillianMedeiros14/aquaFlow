@@ -2,10 +2,12 @@ import React from "react";
 import AuthRoutes from "./auth.routes";
 import AppRoutes from "./app.routes";
 
-export default function Routes() {
-  const isUser = false;
+import { useAuth } from "@global/context/useAuth";
 
-  if (isUser) {
+export default function Routes() {
+  const user = useAuth((state) => state.user);
+
+  if (user?.uid !== "") {
     return <AppRoutes />;
   } else {
     return <AuthRoutes />;

@@ -1,40 +1,38 @@
 import { useMutation } from "@tanstack/react-query";
-import { ISignIn } from "../types/auth";
 
 import Toast from "react-native-toast-message";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { schemaSignIn } from "../schema/signInShema";
-import { signInService } from "../services/signIn.service";
 import { useAuth } from "@global/context/useAuth";
+import {
+  IUpdateUserServiceProps,
+  updateUserService,
+} from "../services/updateUser.service";
+import { signUpSchema } from "../schema/updateUserSchema";
+import { IUpdateUser } from "../types/user";
 
-export function useSignIn() {
-  const setUser = useAuth((state) => state.setUser);
+export function useUpdateUser() {
+  const user = useAuth((state) => state.user);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<ISignIn>({
-    resolver: yupResolver(schemaSignIn),
+    setValue,
+  } = useForm<IUpdateUser>({
+    resolver: yupResolver(signUpSchema),
   });
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (data: ISignIn) => {
-      return signInService(data);
+  const { mutate, isPending, isSuccess } = useMutation({
+    mutationFn: (data: IUpdateUserServiceProps) => {
+      return updateUserService(data);
     },
     onSuccess: (data) => {
       Toast.show({
-        text1: "Login realizado com sucesso!",
+        text1: "Dados  atualizado com sucesso!",
       });
-      setUser(
-        {
-          uid: data.user.uid,
-        },
-        false
-      );
     },
     onError: (e, variables, context) => {
       console.log("error");
@@ -47,10 +45,9 @@ export function useSignIn() {
           type: "error",
         });
         setError("email", { message: "Verifique seu email de login" });
-        setError("password", { message: "Verifique sua senha" });
       } else {
         Toast.show({
-          text1: "Erro ao realizar o login",
+          text1: "Erro ao atualizar dados",
           type: "error",
         });
       }
@@ -64,5 +61,7 @@ export function useSignIn() {
     control,
     handleSubmit,
     setError,
+    setValue,
+    isSuccess,
   };
 }

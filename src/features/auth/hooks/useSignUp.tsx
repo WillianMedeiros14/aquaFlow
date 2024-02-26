@@ -11,9 +11,10 @@ import {
   ISignUpInServiceProps,
   signUpService,
 } from "../services/signUp.service";
+import { useAuth } from "@global/context/useAuth";
 
 export function useSignUp() {
-  // const setUser = useAuth((state) => state.setUser);
+  const setUser = useAuth((state) => state.setUser);
 
   const {
     control,
@@ -39,17 +40,21 @@ export function useSignUp() {
       });
     },
     onSuccess: (data) => {
-      console.log({ data });
+      console.log({ data: data.user.uid });
 
       // api.defaults.headers.common[
       //   "Authorization"
       // ] = `Bearer ${data.token.token}`;
 
-      // Toast.show({
-      //   text1: "Cadastro realizada com sucesso!",
-      // });
-
-      // setUser(data, true);
+      Toast.show({
+        text1: "Cadastro realizado com sucesso!",
+      });
+      setUser(
+        {
+          uid: data.user.uid,
+        },
+        false
+      );
     },
     onError: (error, variables, context) => {
       const { message, name, cause, stack } = error;

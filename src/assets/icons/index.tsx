@@ -7,6 +7,7 @@ import LockSvg from "./lock.svg";
 import GoogleSvg from "./Google.svg";
 import FacebookSvg from "./Facebook.svg";
 import UserOutlineSvg from "./User_Outline.svg";
+import EditSvg from "./edit.svg";
 
 export {
   DropLogoSvg,
@@ -18,4 +19,5 @@ export {
   FacebookSvg,
   GoogleSvg,
   UserOutlineSvg,
+  EditSvg,
 };

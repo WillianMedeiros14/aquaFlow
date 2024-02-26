@@ -10,6 +10,8 @@ import TabBar from "./TabBar";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import theme from "@theme/theme/theme";
 import { HomeScreen } from "@features/home/screens/HomeScreen";
+import ProfileRoutes from "./profile.routes";
+import ProfileHomeScreen from "@features/profile/screens/ProfileHomeSreen";
 
 const Stack = createNativeStackNavigator();
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -34,8 +36,8 @@ export default function AppRoutes() {
       }}
     >
       <Stack.Screen name="AppRoutesTabs" component={AppRoutesTabs} />
-      {/* <Stack.Screen name="ProfileRoutes" component={ProfileRoutes} />
-      <Stack.Screen name="MealsRoutes" component={MealsRoutes} />
+      <Stack.Screen name="ProfileRoutes" component={ProfileRoutes} />
+      {/* <Stack.Screen name="MealsRoutes" component={MealsRoutes} />
       <Stack.Screen name="ShoppingListRoutes" component={ShoppingListRoutes} />
       <Screen name="TermsOfUse" component={TermsOfUse} />
       <Screen name="PrivacyPolicies" component={PrivacyPolicies} /> */}
@@ -50,6 +52,7 @@ export function AppRoutesTabs() {
       screenOptions={{
         tabBarStyle: { paddingTop: 14, paddingBottom: 14, display: "none" },
         tabBarActiveTintColor: theme.colors.primary,
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Screen
@@ -90,7 +93,7 @@ export function AppRoutesTabs() {
 
       <Screen
         name="ProfileScreenTab"
-        component={HomeScreen}
+        component={ProfileHomeScreen}
         options={{
           headerShown: false,
           tabBarLabel: "Perfil",

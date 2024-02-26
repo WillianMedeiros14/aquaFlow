@@ -46,6 +46,7 @@ export function TextInput({
   isActiveOnPress = false,
   onPress,
   icon,
+  editable,
   ...rest
 }: Props) {
   const theme = useTheme();
@@ -65,6 +66,7 @@ export function TextInput({
       <Container
         multiline={multiline}
         disabled={!isActiveOnPress}
+        isEdit={editable}
         isFocus={isFocus}
         onPress={onPress}
       >
@@ -76,6 +78,7 @@ export function TextInput({
           secureTextEntry={isPassword ? !isToSee : isPassword}
           value={value}
           multiline={multiline}
+          editable={editable}
           onChangeText={onChangeText}
           onFocus={() => {
             setIsFocus(true);

@@ -1,7 +1,7 @@
 import React from "react";
 
 import * as S from "./styles";
-import { BackButtonHeaderSvg } from "@assets/icons";
+import { BackButtonHeaderSvg, EditSvg } from "@assets/icons";
 import Text from "../Text";
 
 import { Spacer } from "../Spacer";
@@ -39,13 +39,13 @@ export function Header({ onPressLeft, onPressRight, title }: IHeaderProps) {
             bottom: 0,
           }}
         >
-          title
+          {title}
         </Text>
       )}
 
       {onPressRight && (
         <S.Button onPress={onPressRight}>
-          <BackButtonHeaderSvg />
+          <EditSvg />
         </S.Button>
       )}
     </S.Container>

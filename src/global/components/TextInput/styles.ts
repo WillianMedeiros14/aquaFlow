@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 export const Container = styled.TouchableOpacity<{
   multiline?: boolean;
   isFocus?: boolean;
+  isEdit?: boolean;
 }>`
   min-height: ${({ multiline }) => (multiline ? `${scale(80)}px` : undefined)};
   height: ${({ multiline }) => (!multiline ? `${scale(52)}px` : undefined)};
@@ -13,7 +14,8 @@ export const Container = styled.TouchableOpacity<{
   border-color: ${({ isFocus, theme }) =>
     isFocus ? theme.colors.primary : "transparent"};
 
-  background-color: ${({ theme }) => theme.colors.backgroundInput};
+  background-color: ${({ theme, isEdit }) =>
+    isEdit ? theme.colors.backgroundInput : theme.colors.backGroundEditInput};
   flex-direction: row;
   align-items: center;
   padding-left: ${scale(20)}px;
