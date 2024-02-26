@@ -82,7 +82,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
               <View style={styles.innerView}>
                 <IconsTabBar
                   label={route.name}
-                  color={isFocused ? theme.colors.primary : theme.colors.gray}
+                  color={isFocused ? theme.colors.primary : theme.colors.black}
                 />
 
                 {route.name !== "AlarmScreenTab" ? (
@@ -92,7 +92,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
                       {
                         color: isFocused
                           ? theme.colors.primary
-                          : theme.colors.gray,
+                          : theme.colors.black,
                       },
                     ]}
                   >
@@ -124,9 +124,9 @@ const TabBar = ({ state, descriptors, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    borderTopColor: "#232733",
+    borderTopColor: "rgba(0,0,0,0.1)",
     borderTopWidth: 1,
-    backgroundColor: "#010314",
+    backgroundColor: theme.colors.white,
     paddingBottom: 10,
     paddingTop: 8,
   },
