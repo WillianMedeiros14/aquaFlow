@@ -7,6 +7,10 @@ import Toast from "react-native-toast-message";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../schema/signUpSchema";
+import {
+  ISignUpInServiceProps,
+  signUpService,
+} from "../services/signUp.service";
 
 export function useSignUp() {
   // const setUser = useAuth((state) => state.setUser);
@@ -16,6 +20,7 @@ export function useSignUp() {
     handleSubmit,
     formState: { errors },
     clearErrors,
+    setError,
   } = useForm<ISignUp>({
     defaultValues: {
       acceptTerms: false,
@@ -23,33 +28,46 @@ export function useSignUp() {
     resolver: yupResolver(signUpSchema),
   });
 
-  // return useMutation({
-  //   mutationFn: (data: ISignUp) => {
-  //     return signUpService(data);
-  //   },
-  //   onSuccess: (data) => {
-  //     console.log({ data });
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: ISignUpInServiceProps) => {
+      return signUpService({
+        email: data.email,
+        password: data.password,
+        phone: data.phone,
+        userName: data.userName,
+        acceptTerms: data.acceptTerms,
+      });
+    },
+    onSuccess: (data) => {
+      console.log({ data });
 
-  //     api.defaults.headers.common[
-  //       "Authorization"
-  //     ] = `Bearer ${data.token.token}`;
+      // api.defaults.headers.common[
+      //   "Authorization"
+      // ] = `Bearer ${data.token.token}`;
 
-  //     Toast.show({
-  //       text1: "Cadastro realizada com sucesso!",
-  //     });
+      // Toast.show({
+      //   text1: "Cadastro realizada com sucesso!",
+      // });
 
-  //     setUser(data, true);
-  //   },
-  //   onError: (error, variables, context) => {
-  //     // An error happened!
-  //     console.log({ error });
-  //     console.log(error?.response?.data);
-  //   },
-  // });
+      // setUser(data, true);
+    },
+    onError: (error, variables, context) => {
+      const { message, name, cause, stack } = error;
+
+      if (message === "Firebase: Error (auth/email-already-in-use).") {
+        setError("email", { message: "Este e-mail já está em uso" });
+      } else {
+        Toast.show({
+          text1: "Erro ao cria cadastro, tente novamente",
+          type: "error",
+        });
+      }
+    },
+  });
 
   return {
-    // mutate,
-    isPending: false,
+    mutate,
+    isPending,
     errors,
     control,
     handleSubmit,

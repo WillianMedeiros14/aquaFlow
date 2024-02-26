@@ -21,7 +21,7 @@ import { StatusBar } from "react-native";
 export default function SignIn() {
   const navigation = useNavigation<AuthScreenNavigationProp>();
 
-  const { isPending, control, handleSubmit, errors } = useSignIn();
+  const { mutate, isPending, control, handleSubmit, errors } = useSignIn();
 
   const [errorLogin, setErrorLogin] = useState("");
 
@@ -32,7 +32,7 @@ export default function SignIn() {
     };
 
     console.log({ dataSend });
-    // mutate(dataSend);
+    mutate(dataSend);
   };
 
   function ComponentBottom() {

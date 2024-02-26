@@ -10,20 +10,24 @@ import { ButtonOptionAuth } from "../../components/ButtonOptionAuth";
 import { useSignUp } from "../../hooks/useSignUp";
 import Text from "@global/components/Text";
 import { AuthScreenNavigationProp } from "routes/auth.routes";
+import { ISignUpInServiceProps } from "@features/auth/services/signUp.service";
 
 export default function SignUp() {
   const navigation = useNavigation<AuthScreenNavigationProp>();
 
-  const { isPending, control, handleSubmit, errors } = useSignUp();
+  const { mutate, isPending, control, handleSubmit, errors } = useSignUp();
 
   const onSubmit = (dataForm: ISignUp) => {
-    const dataSend = {
+    const dataSend: ISignUpInServiceProps = {
       email: dataForm.email.trim(),
       password: dataForm.password.trim(),
+      acceptTerms: dataForm.acceptTerms,
+      phone: dataForm.phone,
+      userName: dataForm.username.trim(),
     };
 
     console.log({ dataSend });
-    // mutate(dataSend);
+    mutate(dataSend);
   };
 
   function ComponentBottom() {
@@ -59,14 +63,13 @@ export default function SignUp() {
           <TextInput
             title="Nome completo"
             placeholder="Nome completo"
-            isPassword
             icon="user"
             value={value}
             onChangeText={(text: string) => {
-              const textParse = text.trim();
+              const textParse = text.trimStart();
               onChange(textParse);
             }}
-            textError={errors.password?.message}
+            textError={errors.username?.message}
           />
         )}
         name="username"
@@ -79,7 +82,7 @@ export default function SignUp() {
         render={({ field: { onChange, value } }) => (
           <TextInput
             title="E-mail"
-            placeholder="contato@email.com"
+            placeholder="E-mail"
             keyboardType="email-address"
             icon="email"
             value={value}
@@ -100,8 +103,30 @@ export default function SignUp() {
         control={control}
         render={({ field: { onChange, value } }) => (
           <TextInput
+            title="Número de telefone"
+            placeholder="Número de telefone"
+            keyboardType="number-pad"
+            icon="user"
+            value={value}
+            onChangeText={(text: string) => {
+              const textParse = text.trim();
+
+              onChange(textParse);
+            }}
+            textError={errors.phone?.message}
+          />
+        )}
+        name="phone"
+      />
+
+      <Spacer height={20} />
+
+      <Controller
+        control={control}
+        render={({ field: { onChange, value } }) => (
+          <TextInput
             title="Senha"
-            placeholder="********"
+            placeholder="Senha"
             isPassword
             icon="lock"
             value={value}
@@ -121,8 +146,8 @@ export default function SignUp() {
         control={control}
         render={({ field: { onChange, value } }) => (
           <TextInput
-            title="Senha"
-            placeholder="********"
+            title="Confirmação de senha"
+            placeholder="Confirmação de senha"
             isPassword
             icon="lock"
             value={value}
@@ -130,7 +155,7 @@ export default function SignUp() {
               const textParse = text.trim();
               onChange(textParse);
             }}
-            textError={errors.password?.message}
+            textError={errors.confirmPassword?.message}
           />
         )}
         name="confirmPassword"
