@@ -78,7 +78,7 @@ export default function ProfileHomeScreen() {
       userId: user.uid,
       data: {
         age: dataForm.age,
-        gender: dataForm.age,
+        gender: dataForm.gender,
         userName: dataForm?.username?.trim(),
       },
     };
@@ -90,15 +90,14 @@ export default function ProfileHomeScreen() {
     if (data && user.uid) {
       setValue("username", data.userName);
       setValue("email", data.email);
-      setValue("age", data.age);
-      setValue("gender", data.gender);
+      setValue("age", data.age?.toString());
+      setValue("gender", data?.gender);
       setIsEdit(false);
     }
   }, [data, user.uid]);
 
   const verify = useMemo(() => {
     if (isSuccess) {
-      refetch();
       setIsEdit(false);
     }
   }, [isSuccess]);
@@ -156,27 +155,31 @@ export default function ProfileHomeScreen() {
               name="username"
             />
 
-            <Spacer height={23} />
+            {!isEdit ? (
+              <>
+                <Spacer height={23} />
 
-            <Controller
-              control={control}
-              render={({ field: { onChange, value } }) => (
-                <TextInput
-                  isActiveTitle
-                  title="E-mail"
-                  placeholder="E-mail"
-                  keyboardType="email-address"
-                  editable={false}
-                  value={value}
-                  onChangeText={(text: string) => {
-                    const textParse = text.trim();
-                    onChange(textParse);
-                  }}
-                  textError={errors.email?.message}
+                <Controller
+                  control={control}
+                  render={({ field: { onChange, value } }) => (
+                    <TextInput
+                      isActiveTitle
+                      title="E-mail"
+                      placeholder="E-mail"
+                      keyboardType="email-address"
+                      editable={false}
+                      value={value}
+                      onChangeText={(text: string) => {
+                        const textParse = text.trim();
+                        onChange(textParse);
+                      }}
+                      textError={errors.email?.message}
+                    />
+                  )}
+                  name="email"
                 />
-              )}
-              name="email"
-            />
+              </>
+            ) : null}
 
             <Spacer height={23} />
 

@@ -13,8 +13,6 @@ import { signUpSchema } from "../schema/updateUserSchema";
 import { IUpdateUser } from "../types/user";
 
 export function useUpdateUser() {
-  const user = useAuth((state) => state.user);
-
   const {
     control,
     handleSubmit,
@@ -35,22 +33,13 @@ export function useUpdateUser() {
       });
     },
     onError: (e, variables, context) => {
-      console.log("error");
       const { message, name, cause, stack } = e;
       console.log({ message, name, cause, stack });
 
-      if (message === "Firebase: Error (auth/invalid-credential).") {
-        Toast.show({
-          text1: "Dados de login incorretos",
-          type: "error",
-        });
-        setError("email", { message: "Verifique seu email de login" });
-      } else {
-        Toast.show({
-          text1: "Erro ao atualizar dados",
-          type: "error",
-        });
-      }
+      Toast.show({
+        text1: "Erro ao atualizar dados",
+        type: "error",
+      });
     },
   });
 

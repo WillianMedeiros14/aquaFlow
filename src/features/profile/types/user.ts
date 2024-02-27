@@ -1,9 +1,11 @@
+import { TypeGender } from "../components/SelelectGenderProfile";
+
 export interface IUser {
   acceptTerms: boolean;
   email: string;
   phone: string;
   userName: string;
-  gender: string;
+  gender?: TypeGender;
   age: string;
 }
 
