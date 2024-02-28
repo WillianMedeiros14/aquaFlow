@@ -31,6 +31,7 @@ import { queryClient } from "@global/config/react-query";
 import Toast from "react-native-toast-message";
 import SignUp from "@features/auth/screens/SignUp";
 import Routes from "routes";
+import CompleteProfileHome from "@features/completeProfile/screens/CompleteProfileHome";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -85,6 +86,7 @@ const App = () => {
           <SafeAreaProvider initialMetrics={initialWindowMetrics}>
             <StatusBar barStyle="dark-content" />
 
+            {/* <CompleteProfileHome /> */}
             <Routes />
             <Toast />
           </SafeAreaProvider>

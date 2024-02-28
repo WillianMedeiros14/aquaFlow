@@ -1,24 +1,22 @@
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../../firebaseConfig";
 
-export interface IUpdateUserServiceProps {
+import { ICompleteProfile } from "../types/completeProfile";
+
+export interface ICompleteProfileServiceProps {
   userId: string;
-  data: {
-    userName?: string;
-    gender?: string;
-    age?: string;
-  };
+  data: ICompleteProfile;
 }
 
-export async function updateUserService({
+export async function completeProfileService({
   userId,
   data,
-}: IUpdateUserServiceProps) {
+}: ICompleteProfileServiceProps) {
   const user = auth.currentUser;
 
   if (user) {
     const userRef = doc(db, "users", userId);
-    await updateDoc(userRef, data);
+    await updateDoc(userRef, { ...data });
   } else {
     console.log("Nenhum usuário está logado");
   }

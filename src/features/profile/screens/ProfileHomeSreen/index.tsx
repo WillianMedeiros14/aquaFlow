@@ -194,7 +194,11 @@ export default function ProfileHomeScreen() {
                   editable={isEdit}
                   onChangeText={(text: string) => {
                     const textParse = text.trimStart();
-                    onChange(textParse);
+                    if (textParse.length === 0) {
+                      onChange(undefined);
+                    } else {
+                      onChange(textParse);
+                    }
                   }}
                   textError={errors.age?.message}
                 />

@@ -8,9 +8,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaSignIn } from "../schema/signInShema";
 import { signInService } from "../services/signIn.service";
 import { useAuth } from "@global/context/useAuth";
+import { useGetUserDetails } from "@features/profile/hooks/useGetUserDetails";
+import { useMemo, useState } from "react";
 
 export function useSignIn() {
   const setUser = useAuth((state) => state.setUser);
+  const [idUser, setIdUser] = useState("");
+
+  const { data, isLoading, isRefetching, refetch } = useGetUserDetails({
+    userId: idUser,
+    isEnabled: false,
+  });
 
   const {
     control,
@@ -26,20 +34,13 @@ export function useSignIn() {
       return signInService(data);
     },
     onSuccess: (data) => {
-      Toast.show({
-        text1: "Login realizado com sucesso!",
-      });
-      setUser(
-        {
-          uid: data.user.uid,
-        },
-        false
-      );
+      setIdUser(data.user.uid);
+      setTimeout(() => {
+        refetch();
+      }, 100);
     },
     onError: (e, variables, context) => {
-      console.log("error");
       const { message, name, cause, stack } = e;
-      console.log({ message, name, cause, stack });
 
       if (message === "Firebase: Error (auth/invalid-credential).") {
         Toast.show({
@@ -57,9 +58,23 @@ export function useSignIn() {
     },
   });
 
+  const verify = useMemo(() => {
+    if (data?.userName && !isLoading && !isRefetching) {
+      Toast.show({
+        text1: "Login realizado com sucesso!",
+      });
+      setUser(
+        {
+          uid: idUser,
+        },
+        false
+      );
+    }
+  }, [data, isLoading, isRefetching, idUser, setUser]);
+
   return {
     mutate,
-    isPending,
+    isPending: isPending || isLoading || isRefetching,
     errors,
     control,
     handleSubmit,

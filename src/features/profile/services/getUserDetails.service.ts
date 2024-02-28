@@ -4,6 +4,7 @@ import { IUser } from "../types/user";
 
 export interface IGetUserDetailsServiceProps {
   userId: string;
+  isEnabled?: boolean;
 }
 
 export async function getUserDetailsService({

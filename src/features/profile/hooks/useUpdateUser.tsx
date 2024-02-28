@@ -29,7 +29,7 @@ export function useUpdateUser() {
     },
     onSuccess: (data) => {
       Toast.show({
-        text1: "Dados  atualizado com sucesso!",
+        text1: "Perfil completado com sucesso!",
       });
     },
     onError: (e, variables, context) => {
@@ -37,7 +37,7 @@ export function useUpdateUser() {
       console.log({ message, name, cause, stack });
 
       Toast.show({
-        text1: "Erro ao atualizar dados",
+        text1: "Erro ao atualizar perfil",
         type: "error",
       });
     },

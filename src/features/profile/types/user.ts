@@ -7,6 +7,11 @@ export interface IUser {
   userName: string;
   gender?: TypeGender;
   age: string;
+
+  weight: string;
+  height: string;
+  timeToWakeUp: Date;
+  timeToSleep: Date;
 }
 
 export interface IUpdateUser {

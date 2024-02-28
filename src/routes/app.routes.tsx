@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import {
   createBottomTabNavigator,
@@ -12,6 +12,9 @@ import theme from "@theme/theme/theme";
 import { HomeScreen } from "@features/home/screens/HomeScreen";
 import ProfileRoutes from "./profile.routes";
 import ProfileHomeScreen from "@features/profile/screens/ProfileHomeSreen";
+import { useAuth } from "@global/context/useAuth";
+import { useGetUserDetails } from "@features/profile/hooks/useGetUserDetails";
+import CompleteProfileHome from "@features/completeProfile/screens/CompleteProfileHome";
 
 const Stack = createNativeStackNavigator();
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -22,12 +25,46 @@ export type RootAppRoutesList = {
   AlarmScreenTab: undefined;
   SettingsScreenTab: undefined;
   ProfileScreenTab: undefined;
+  CompleteProfileHome: undefined;
 };
 
 export type AppScreenNavigationProp =
   BottomTabNavigationProp<RootAppRoutesList>;
 
 export default function AppRoutes() {
+  const user = useAuth((state) => state.user);
+
+  const { data, isLoading, isRefetching } = useGetUserDetails({
+    userId: user?.uid,
+    isEnabled: true,
+  });
+
+  const verify = useMemo(() => {
+    if (data?.gender !== undefined && data?.gender !== null) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [data, isLoading, isRefetching]);
+
+  console.log({ verify });
+
+  if (!verify) {
+    return (
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: "slide_from_right",
+        }}
+      >
+        <Stack.Screen
+          name="CompleteProfileHome"
+          component={CompleteProfileHome}
+        />
+      </Stack.Navigator>
+    );
+  }
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -37,6 +74,7 @@ export default function AppRoutes() {
     >
       <Stack.Screen name="AppRoutesTabs" component={AppRoutesTabs} />
       <Stack.Screen name="ProfileRoutes" component={ProfileRoutes} />
+
       {/* <Stack.Screen name="MealsRoutes" component={MealsRoutes} />
       <Stack.Screen name="ShoppingListRoutes" component={ShoppingListRoutes} />
       <Screen name="TermsOfUse" component={TermsOfUse} />

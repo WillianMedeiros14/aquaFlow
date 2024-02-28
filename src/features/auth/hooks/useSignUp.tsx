@@ -40,12 +40,6 @@ export function useSignUp() {
       });
     },
     onSuccess: (data) => {
-      console.log({ data: data.user.uid });
-
-      // api.defaults.headers.common[
-      //   "Authorization"
-      // ] = `Bearer ${data.token.token}`;
-
       Toast.show({
         text1: "Cadastro realizado com sucesso!",
       });

@@ -8,6 +8,10 @@ import GoogleSvg from "./Google.svg";
 import FacebookSvg from "./Facebook.svg";
 import UserOutlineSvg from "./User_Outline.svg";
 import EditSvg from "./edit.svg";
+import GenderAllCompleteProfileSvg from "./genderAllCompleteProfile.svg";
+import FemaleGenderCompleteProfileSvg from "./femaleGenderCompleteProfile.svg";
+import MaleGenderCompleteProfileSvg from "./maleGenderCompleteProfile.svg";
+import CheckSvg from "./check.svg";
 
 export {
   DropLogoSvg,
@@ -20,4 +24,8 @@ export {
   GoogleSvg,
   UserOutlineSvg,
   EditSvg,
+  MaleGenderCompleteProfileSvg,
+  FemaleGenderCompleteProfileSvg,
+  GenderAllCompleteProfileSvg,
+  CheckSvg,
 };
