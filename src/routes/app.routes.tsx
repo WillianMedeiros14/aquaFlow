@@ -15,6 +15,7 @@ import ProfileHomeScreen from "@features/profile/screens/ProfileHomeSreen";
 import { useAuth } from "@global/context/useAuth";
 import { useGetUserDetails } from "@features/profile/hooks/useGetUserDetails";
 import CompleteProfileHome from "@features/completeProfile/screens/CompleteProfileHome";
+import SettingsHomeScreen from "@features/settings/screens/SettingsHomeScreen";
 
 const Stack = createNativeStackNavigator();
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -120,7 +121,7 @@ export function AppRoutesTabs() {
 
       <Screen
         name="SettingsScreenTab"
-        component={HomeScreen}
+        component={SettingsHomeScreen}
         options={{
           headerShown: false,
           tabBarLabel: "Config.",
