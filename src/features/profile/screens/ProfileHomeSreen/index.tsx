@@ -22,6 +22,7 @@ import { IUpdateUser } from "@features/profile/types/user";
 import { IUpdateUserServiceProps } from "@features/profile/services/updateUser.service";
 import { Controller } from "react-hook-form";
 import { queryClient } from "@global/config/react-query";
+import { UserDefaultSvg } from "@assets/icons";
 
 export default function ProfileHomeScreen() {
   const theme = useTheme();
@@ -130,9 +131,13 @@ export default function ProfileHomeScreen() {
           </>
         ) : (
           <>
-            <S.ImageUser
+            {/* <S.ImageUser
               source={{ uri: "https://github.com/WillianMedeiros14.png" }}
-            />
+            /> */}
+
+            <S.ContainerImageUser>
+              <UserDefaultSvg width={scale(100)} height={scale(100)} />
+            </S.ContainerImageUser>
 
             <Spacer height={30} />
 

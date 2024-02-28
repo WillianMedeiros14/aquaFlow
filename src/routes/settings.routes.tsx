@@ -5,11 +5,12 @@ import {
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 import SettingsHomeScreen from "@features/settings/screens/SettingsHomeScreen";
+import Security from "@features/settings/screens/Security";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export type RootSettingsRoutesList = {
-  SettingsHomeScreen: undefined;
+  Security: undefined;
 };
 
 export type SettingsScreenNavigationProp =
@@ -23,7 +24,7 @@ export default function SettingsRoutes() {
         animation: "slide_from_right",
       }}
     >
-      <Screen name="SettingsHomeScreen" component={SettingsHomeScreen} />
+      <Screen name="Security" component={Security} />
     </Navigator>
   );
 }

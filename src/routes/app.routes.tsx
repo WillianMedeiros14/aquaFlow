@@ -16,6 +16,7 @@ import { useAuth } from "@global/context/useAuth";
 import { useGetUserDetails } from "@features/profile/hooks/useGetUserDetails";
 import CompleteProfileHome from "@features/completeProfile/screens/CompleteProfileHome";
 import SettingsHomeScreen from "@features/settings/screens/SettingsHomeScreen";
+import SettingsRoutes from "./settings.routes";
 
 const Stack = createNativeStackNavigator();
 const { Navigator, Screen } = createBottomTabNavigator();
@@ -27,6 +28,7 @@ export type RootAppRoutesList = {
   SettingsScreenTab: undefined;
   ProfileScreenTab: undefined;
   CompleteProfileHome: undefined;
+  SettingsRoutes: undefined;
 };
 
 export type AppScreenNavigationProp =
@@ -73,7 +75,7 @@ export default function AppRoutes() {
     >
       <Stack.Screen name="AppRoutesTabs" component={AppRoutesTabs} />
       <Stack.Screen name="ProfileRoutes" component={ProfileRoutes} />
-
+      <Stack.Screen name="SettingsRoutes" component={SettingsRoutes} />
       {/* <Stack.Screen name="MealsRoutes" component={MealsRoutes} />
       <Stack.Screen name="ShoppingListRoutes" component={ShoppingListRoutes} />
       <Screen name="TermsOfUse" component={TermsOfUse} />

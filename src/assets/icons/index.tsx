@@ -13,6 +13,8 @@ import FemaleGenderCompleteProfileSvg from "./femaleGenderCompleteProfile.svg";
 import MaleGenderCompleteProfileSvg from "./maleGenderCompleteProfile.svg";
 import CheckSvg from "./check.svg";
 import RightArrowSvg from "./rightArrow.svg";
+import SvgDelete from "./delete.svg";
+import UserDefaultSvg from "./userDefault.svg";
 
 export {
   DropLogoSvg,
@@ -30,4 +32,6 @@ export {
   GenderAllCompleteProfileSvg,
   CheckSvg,
   RightArrowSvg,
+  SvgDelete,
+  UserDefaultSvg,
 };

@@ -16,6 +16,11 @@ export const ScrollView = styled.ScrollView`
   padding-right: ${scale(16)}px;
 `;
 
+export const ContainerImageUser = styled.View`
+  align-self: center;
+  margin-top: ${scale(24)}px;
+`;
+
 export const ImageUser = styled.Image`
   width: ${scale(100)}px;
   height: ${scale(100)}px;

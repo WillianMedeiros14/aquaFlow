@@ -1,3 +1,4 @@
+import { queryClient } from "@global/config/react-query";
 import { ILoggedInUserContext } from "@global/types/loggedInUserContext";
 import { create } from "zustand";
 
@@ -31,6 +32,7 @@ export const useAuth = create<IAuthStore>((set, get) => ({
   },
 
   logOut: async () => {
+    queryClient.clear();
     set(() => ({
       user: {
         uid: "",
