@@ -47,8 +47,6 @@ export default function AppRoutes() {
     }
   }, [data, isLoading, isRefetching]);
 
-  console.log({ verify });
-
   if (!verify) {
     return (
       <Stack.Navigator
