@@ -32,6 +32,7 @@ import Toast from "react-native-toast-message";
 import SignUp from "@features/auth/screens/SignUp";
 import Routes from "routes";
 import CompleteProfileHome from "@features/completeProfile/screens/CompleteProfileHome";
+import { HomeScreen } from "@features/home/screens/HomeScreen";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -86,8 +87,8 @@ const App = () => {
           <SafeAreaProvider initialMetrics={initialWindowMetrics}>
             <StatusBar barStyle="dark-content" />
 
-            {/* <CompleteProfileHome /> */}
-            <Routes />
+            <HomeScreen />
+            {/* <Routes /> */}
             <Toast />
           </SafeAreaProvider>
         </NavigationContainer>

@@ -15,6 +15,7 @@ import CheckSvg from "./check.svg";
 import RightArrowSvg from "./rightArrow.svg";
 import SvgDelete from "./delete.svg";
 import UserDefaultSvg from "./userDefault.svg";
+import NotificationSvg from "./notification.svg";
 
 export {
   DropLogoSvg,
@@ -34,4 +35,5 @@ export {
   RightArrowSvg,
   SvgDelete,
   UserDefaultSvg,
+  NotificationSvg,
 };
