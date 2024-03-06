@@ -54,3 +54,19 @@ export const ButtonAddConsumption = styled.TouchableOpacity`
 
   align-self: flex-start;
 `;
+
+export const ContainerDailyGoal = styled.View`
+  /* align-self: center; */
+  position: relative;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DailyGoal = styled.View`
+  position: absolute;
+  top: 0;
+  right: ${scale(25)}px;
+  border-radius: ${scale(16)}px;
+  background-color: ${({ theme }) => theme.colors.white};
+  padding: ${scale(10)}px ${scale(12)}px ${scale(8)}px ${scale(12)}px;
+`;

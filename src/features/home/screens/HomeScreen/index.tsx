@@ -7,6 +7,7 @@ import { scale } from "react-native-size-matters";
 import { Spacer } from "@global/components/Spacer";
 import Text from "@global/components/Text";
 import AnimatedSVG from "@features/home/components/AnimatedSVG";
+import { Button } from "@global/components/Button";
 
 const { width } = Dimensions.get("window");
 
@@ -56,7 +57,45 @@ export function HomeScreen() {
           </S.ContentAddConsumption>
         </S.ContainerAddConsumption>
 
-        <AnimatedSVG />
+        <Spacer height={54} />
+
+        <S.ContainerDailyGoal>
+          <AnimatedSVG />
+
+          <S.DailyGoal>
+            <Text
+              variant="Poppins_500Medium"
+              fontSize={12}
+              color="grayQuaternary"
+            >
+              Meta diária
+            </Text>
+            <Spacer height={7} />
+            <Text variant="Poppins_600SemiBold" fontSize={16} color="grayText">
+              2000ml
+            </Text>
+          </S.DailyGoal>
+
+          <Spacer height={30} />
+
+          <Button title="Ir para a dashboard" height={48} />
+
+          <Text
+            variant="Poppins_500Medium"
+            fontSize={12}
+            color="grayQuaternary"
+            textAlign="center"
+            style={{
+              paddingLeft: scale(30),
+              paddingRight: scale(30),
+              marginTop: scale(9),
+            }}
+          >
+            Você conseguiu 50% da meta de hoje, mantenha o foco na sua saúde!
+          </Text>
+        </S.ContainerDailyGoal>
+
+        <Spacer height={20} />
       </S.ScrollView>
     </S.Container>
   );

@@ -87,8 +87,7 @@ const App = () => {
           <SafeAreaProvider initialMetrics={initialWindowMetrics}>
             <StatusBar barStyle="dark-content" />
 
-            <HomeScreen />
-            {/* <Routes /> */}
+            <Routes />
             <Toast />
           </SafeAreaProvider>
         </NavigationContainer>
