@@ -8,6 +8,8 @@ import { Spacer } from "@global/components/Spacer";
 import Text from "@global/components/Text";
 import AnimatedSVG from "@features/home/components/AnimatedSVG";
 import { Button } from "@global/components/Button";
+import { useGetUserDetails } from "@features/profile/hooks/useGetUserDetails";
+import { useAuth } from "@global/context/useAuth";
 
 const { width } = Dimensions.get("window");
 
