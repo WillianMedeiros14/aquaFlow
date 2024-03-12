@@ -10,6 +10,7 @@ import TabBar from "./TabBar";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import theme from "@theme/theme/theme";
 import { HomeScreen } from "@features/home/screens/HomeScreen";
+import { AnalyzeHomeScreen } from "@features/analyze/screens/AnalyzeScreenHome"
 import ProfileRoutes from "./profile.routes";
 import ProfileHomeScreen from "@features/profile/screens/ProfileHomeSreen";
 import { useAuth } from "@global/context/useAuth";
@@ -105,7 +106,7 @@ export function AppRoutesTabs() {
 
       <Screen
         name="AnalysisScreenTab"
-        component={HomeScreen}
+        component={AnalyzeHomeScreen}
         options={{
           headerShown: false,
           tabBarLabel: "Análise",
