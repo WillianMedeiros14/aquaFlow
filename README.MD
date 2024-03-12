@@ -1,21 +1,25 @@
 <h1 align="center">
-  Cadastro de produtos
+   Fluxo Aqua
 </h1>
 
 <br>
 
 ## 💻 Sobre o Projeto
 
-Aplicação construída com **[Express](https://reactnative.dev/)**. <br />
-O objetivo da apliacação é...
+Aplicação construída com ** [ React Native ] ( https://reactnative.dev/ ) ** . 
+<br />
+
+## 🚀 Informações
+
+Este projeto foi desenvolvido tecnicamente por ** Willian Medeiros ** (Desenvolvedor), ** Jonas Moreira Barbosa ** (Desenvolvedor) : [ linkedin ] (  https://www.linkedin.com/in/jonas-moreira28  ) - [ github ] (  https://github.com/JonasMoreira5/JonasMoreira5  ) , ** Frankson Leal ** (Desenvolvedor), ** Vitor Vasconcelos ** (Design), como projeto final da Disciplina de Engenharia de Software B do Instituto de Ciências Exatas e Tecnologia - ICET-UFAM.
+## 🎲 Executar aplicação
 
 ### Requisítos antes de executar
 
 - Só é possível executar no iOS se tiver um Mac OS ou um iPhone.
 - É necessario ter os softwares abaixo instalados em sua máquina:
 - **[NodeJs](https://nodejs.org/en)**. instale a versão LTS.
-- **[Express Handlebars](https://www.npmjs.com/package/express-handlebars)**.
-- **[Express Framework](https://expressjs.com/pt-br/)**.
+- ** [ Fio ] ( https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable )**.
 
 Depois disso excute os passos abaixo:
 
