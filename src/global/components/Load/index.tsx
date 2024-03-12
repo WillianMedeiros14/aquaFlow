@@ -7,7 +7,7 @@ export function Load() {
   const theme = useTheme();
   return (
     <S.ConTainer>
-      <ActivityIndicator color={theme.colors.white} />
+      <ActivityIndicator color={theme.colors.primary} />
     </S.ConTainer>
   );
 }

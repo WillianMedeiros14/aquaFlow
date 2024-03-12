@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { StatusBar } from "react-native";
 import {
   useFonts,
   Poppins_400Regular,
@@ -19,13 +18,21 @@ import { ThemeProvider } from "styled-components";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { SplashScreen } from "@features/SplashSccreen";
 import { useEffect, useState } from "react";
-import { SignIn } from "@features/auth/SignIn";
+
 import { NavigationContainer } from "@react-navigation/native";
 import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
 import Onboarding from "@features/onboarding/screens/Onboarding";
+import SignIn from "@features/auth/screens/SignIn";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "@global/config/react-query";
+import Toast from "react-native-toast-message";
+import SignUp from "@features/auth/screens/SignUp";
+import Routes from "routes";
+import CompleteProfileHome from "@features/completeProfile/screens/CompleteProfileHome";
+import { HomeScreen } from "@features/home/screens/HomeScreen";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -75,12 +82,16 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <Onboarding />
-          <StatusBar style="auto" />
-        </SafeAreaProvider>
-      </NavigationContainer>
+      <QueryClientProvider client={queryClient}>
+        <NavigationContainer>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <StatusBar barStyle="dark-content" />
+
+            <Routes />
+            <Toast />
+          </SafeAreaProvider>
+        </NavigationContainer>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };

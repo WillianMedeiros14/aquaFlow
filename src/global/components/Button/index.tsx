@@ -2,7 +2,7 @@ import React from "react";
 import { ActivityIndicator } from "react-native";
 import { useTheme } from "styled-components";
 
-import { Container, Content } from "./styles";
+import { Container, Content, TypeButton } from "./styles";
 
 import { RectButtonProps } from "react-native-gesture-handler";
 
@@ -23,6 +23,7 @@ interface Props extends RectButtonProps {
   backgroundColor?: ColorType;
   fontVariant?: TypographyStylesType;
   icon?: IconsButtonType;
+  type?: TypeButton;
 }
 
 export function Button({
@@ -35,11 +36,17 @@ export function Button({
   fontVariant = "Poppins_700Bold",
   style,
   icon,
+  type = "primary",
   ...rest
 }: Props) {
   const theme = useTheme();
   return (
-    <Container height={height} backgroundColor={backgroundColor} style={style}>
+    <Container
+      height={height}
+      backgroundColor={backgroundColor}
+      type={type}
+      style={style}
+    >
       <Content {...rest}>
         {isLoad ? (
           <ActivityIndicator color={theme.colors.white} />
