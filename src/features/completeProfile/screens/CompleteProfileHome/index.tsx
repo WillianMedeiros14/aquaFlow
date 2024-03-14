@@ -18,6 +18,11 @@ import { SelectTime } from "@features/completeProfile/components/SelectTime";
 import { checkAMorPM } from "@features/completeProfile/utils/checkAMorPM";
 import { ICompleteProfileServiceProps } from "@features/completeProfile/services/completeProfie.service";
 import { useAuth } from "@global/context/useAuth";
+import {
+  calculateWaterDistribution,
+  dailyAmountOfWater,
+  rangeOfWakingHours,
+} from "@global/utils/calculatingDailyGoals";
 
 export default function CompleteProfileHome() {
   const navigation = useNavigation();
@@ -29,6 +34,20 @@ export default function CompleteProfileHome() {
     useCompleteProfile();
 
   const onSubmit = async (dataForm: ICompleteProfile) => {
+    const resultDailyAmountOfWater = dailyAmountOfWater({
+      weight: dataForm.weight.trim(),
+    });
+
+    const valueRangeOfWakingHours = rangeOfWakingHours({
+      sleepTime: dataForm.timeToSleep,
+      wakeTime: dataForm.timeToWakeUp,
+    });
+
+    const resultWaterDistributionOnTheDay = calculateWaterDistribution({
+      dailyAmountOfWater: resultDailyAmountOfWater,
+      awakeHours: valueRangeOfWakingHours,
+    });
+
     const dataSend: ICompleteProfileServiceProps = {
       userId: user.uid,
       data: {
@@ -38,8 +57,13 @@ export default function CompleteProfileHome() {
         timeToSleep: dataForm.timeToSleep,
         timeToWakeUp: dataForm.timeToWakeUp,
         weight: dataForm.weight.trim(),
+
+        dailyAmountOfWater: resultDailyAmountOfWater,
+        rangeOfWakingHours: valueRangeOfWakingHours,
+        waterDistributionOnTheDay: resultWaterDistributionOnTheDay,
       },
     };
+
     mutate(dataSend);
   };
 

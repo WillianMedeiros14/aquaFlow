@@ -5,4 +5,8 @@ export interface ICompleteProfile {
   height: string;
   timeToWakeUp: Date;
   timeToSleep: Date;
+
+  dailyAmountOfWater?: number;
+  rangeOfWakingHours?: number;
+  waterDistributionOnTheDay?: number;
 }
