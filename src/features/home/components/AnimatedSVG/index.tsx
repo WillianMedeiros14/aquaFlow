@@ -7,10 +7,15 @@ import Animated, {
   withRepeat,
   withTiming,
 } from "react-native-reanimated";
+import Text from "@global/components/Text";
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-const AnimatedSVG = () => {
+interface IAnimatedSVGProps {
+  amountOfWaterConsumed?: number;
+}
+
+const AnimatedSVG = ({ amountOfWaterConsumed }: IAnimatedSVGProps) => {
   const progress = useSharedValue(1);
 
   return (
@@ -44,6 +49,18 @@ const AnimatedSVG = () => {
           fillOpacity={progress.value}
         />
       </Svg>
+
+      <Text
+        variant="Poppins_600SemiBold"
+        fontSize={20}
+        color="white"
+        style={{
+          position: "absolute",
+          bottom: 25,
+        }}
+      >
+        {amountOfWaterConsumed}ml
+      </Text>
     </View>
   );
 };
@@ -53,6 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    position: "relative",
   },
 });
 

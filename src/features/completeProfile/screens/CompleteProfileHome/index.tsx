@@ -48,9 +48,11 @@ export default function CompleteProfileHome() {
       awakeHours: valueRangeOfWakingHours,
     });
 
+    const currentDate = new Date();
+
     const dataSend: ICompleteProfileServiceProps = {
       userId: user.uid,
-      data: {
+      dataUser: {
         age: dataForm.age,
         gender: dataForm.gender.trim(),
         height: dataForm.height.trim(),
@@ -58,11 +60,18 @@ export default function CompleteProfileHome() {
         timeToWakeUp: dataForm.timeToWakeUp,
         weight: dataForm.weight.trim(),
 
-        dailyAmountOfWater: resultDailyAmountOfWater,
         rangeOfWakingHours: valueRangeOfWakingHours,
+      },
+      dataHistoric: {
+        dailyAmountOfWater: resultDailyAmountOfWater,
         waterDistributionOnTheDay: resultWaterDistributionOnTheDay,
+        amountOfWaterConsumed: 0,
+        date: currentDate.toISOString().split("T")[0],
+        userId: user.uid,
       },
     };
+
+    console.log({ dataSend });
 
     mutate(dataSend);
   };

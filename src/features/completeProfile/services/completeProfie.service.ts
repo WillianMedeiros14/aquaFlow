@@ -1,22 +1,30 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { collection, doc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../../firebaseConfig";
 
-import { ICompleteProfile } from "../types/completeProfile";
+import {
+  ICompleteProfile,
+  IDataSendHistoricUser,
+} from "../types/completeProfile";
 
 export interface ICompleteProfileServiceProps {
   userId: string;
-  data: ICompleteProfile;
+  dataUser: ICompleteProfile;
+  dataHistoric: IDataSendHistoricUser;
 }
 
 export async function completeProfileService({
   userId,
-  data,
+  dataUser,
+  dataHistoric,
 }: ICompleteProfileServiceProps) {
   const user = auth.currentUser;
 
   if (user) {
     const userRef = doc(db, "users", userId);
-    await updateDoc(userRef, { ...data });
+    const historicRef = doc(collection(db, "historic"));
+
+    await updateDoc(userRef, { ...dataUser });
+    await setDoc(historicRef, { ...dataHistoric });
   } else {
     console.log("Nenhum usuário está logado");
   }

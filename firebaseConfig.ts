@@ -8,6 +8,10 @@ import {
   setDoc,
   doc,
   getDoc,
+  getDocs,
+  where,
+  query,
+  onSnapshot,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -43,4 +47,11 @@ export {
   db,
   collection,
   addDoc,
+  where,
+  setDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  onSnapshot,
 };

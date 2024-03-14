@@ -5,8 +5,13 @@ export interface ICompleteProfile {
   height: string;
   timeToWakeUp: Date;
   timeToSleep: Date;
-
-  dailyAmountOfWater?: number;
   rangeOfWakingHours?: number;
-  waterDistributionOnTheDay?: number;
+}
+
+export interface IDataSendHistoricUser {
+  userId: string;
+  dailyAmountOfWater: number;
+  waterDistributionOnTheDay: number;
+  amountOfWaterConsumed: number;
+  date: string;
 }

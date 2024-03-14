@@ -12,6 +12,10 @@ export interface IUser {
   height: string;
   timeToWakeUp: Date;
   timeToSleep: Date;
+
+  dailyAmountOfWater?: number;
+  rangeOfWakingHours?: number;
+  waterDistributionOnTheDay?: number;
 }
 
 export interface IUpdateUser {
