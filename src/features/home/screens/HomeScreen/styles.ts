@@ -53,6 +53,9 @@ export const ButtonAddConsumption = styled.TouchableOpacity`
   border-radius: ${scale(25)}px;
 
   align-self: flex-start;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ContainerDailyGoal = styled.View`

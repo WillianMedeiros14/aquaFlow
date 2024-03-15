@@ -1,6 +1,6 @@
 import * as S from "./styles";
 import { HeaderHomeScreen } from "@features/home/components/HeaderHomeScreen";
-import { Dimensions, StatusBar } from "react-native";
+import { ActivityIndicator, Dimensions, StatusBar, View } from "react-native";
 import { BackGroundAddConsumptionHomeSvg } from "@assets/vector";
 import { scale } from "react-native-size-matters";
 import { Spacer } from "@global/components/Spacer";
@@ -11,6 +11,10 @@ import { useGetUserDetails } from "@features/profile/hooks/useGetUserDetails";
 import { useAuth } from "@global/context/useAuth";
 import { useGetUserDetailsWaterByDate } from "@features/home/hooks/useGetUserDetailsWaterByDate";
 import { Load } from "@global/components/Load";
+import { calculateNextHourWater } from "@global/utils/calculatingDailyGoals";
+import { useAddingWaterConsumption } from "@features/home/hooks/useAddingWaterConsumption";
+import { IAddingWaterConsumptionServiceServiceProps } from "@features/home/services/addingWaterConsumption.service";
+import theme from "@theme/theme/theme";
 
 const { width } = Dimensions.get("window");
 
@@ -26,6 +30,29 @@ export function HomeScreen() {
       date: new Date().toISOString().split("T")[0],
       userId: user?.uid,
     });
+
+  const { mutate, isPending } = useAddingWaterConsumption();
+
+  function onAddConsumption() {
+    if (dataWater) {
+      const nextTimeToDrinkWater = calculateNextHourWater(
+        dataWater?.nextTimeToDrinkWater as string
+      );
+
+      const amountOfWaterConsumed =
+        dataWater?.waterDistributionOnTheDay + dataWater?.amountOfWaterConsumed;
+
+      const dataSend: IAddingWaterConsumptionServiceServiceProps = {
+        id: dataWater.id,
+        data: {
+          amountOfWaterConsumed: parseFloat(amountOfWaterConsumed.toFixed(2)),
+          nextTimeToDrinkWater,
+        },
+      };
+
+      mutate(dataSend);
+    }
+  }
 
   return (
     <S.Container>
@@ -54,7 +81,7 @@ export function HomeScreen() {
                     fontSize={20}
                     color="grayText"
                   >
-                    11:00 AM
+                    {dataWater?.nextTimeToDrinkWater}
                   </Text>
 
                   <Text
@@ -63,16 +90,27 @@ export function HomeScreen() {
                     color="grayQuaternary"
                     style={{
                       marginTop: -5,
+                      alignContent: "center",
+                      justifyContent: "center",
                     }}
                   >
                     {dataWater?.waterDistributionOnTheDay}ml de água
                   </Text>
                 </S.ContainerConsumptionText>
 
-                <S.ButtonAddConsumption>
+                <S.ButtonAddConsumption onPress={onAddConsumption}>
                   <Text variant="Poppins_500Medium" fontSize={10} color="black">
                     Adicionar consumo
                   </Text>
+                  {isPending && (
+                    <View
+                      style={{
+                        marginLeft: 10,
+                      }}
+                    >
+                      <ActivityIndicator color={theme.colors.primary} />
+                    </View>
+                  )}
                 </S.ButtonAddConsumption>
               </S.ContentAddConsumption>
             </S.ContainerAddConsumption>

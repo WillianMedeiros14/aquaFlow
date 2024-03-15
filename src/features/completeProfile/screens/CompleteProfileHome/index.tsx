@@ -19,6 +19,7 @@ import { checkAMorPM } from "@features/completeProfile/utils/checkAMorPM";
 import { ICompleteProfileServiceProps } from "@features/completeProfile/services/completeProfie.service";
 import { useAuth } from "@global/context/useAuth";
 import {
+  calculateTheNextTimeToDrinkWater,
   calculateWaterDistribution,
   dailyAmountOfWater,
   rangeOfWakingHours,
@@ -48,6 +49,10 @@ export default function CompleteProfileHome() {
       awakeHours: valueRangeOfWakingHours,
     });
 
+    const resultNextTimeToDrinkWater = calculateTheNextTimeToDrinkWater(
+      dataForm.timeToWakeUp
+    );
+
     const currentDate = new Date();
 
     const dataSend: ICompleteProfileServiceProps = {
@@ -68,10 +73,9 @@ export default function CompleteProfileHome() {
         amountOfWaterConsumed: 0,
         date: currentDate.toISOString().split("T")[0],
         userId: user.uid,
+        nextTimeToDrinkWater: resultNextTimeToDrinkWater,
       },
     };
-
-    console.log({ dataSend });
 
     mutate(dataSend);
   };

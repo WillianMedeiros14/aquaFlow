@@ -14,4 +14,5 @@ export interface IDataSendHistoricUser {
   waterDistributionOnTheDay: number;
   amountOfWaterConsumed: number;
   date: string;
+  nextTimeToDrinkWater: string;
 }

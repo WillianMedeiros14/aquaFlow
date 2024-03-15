@@ -31,12 +31,19 @@ export async function getUserDetailsWaterByDateService({
 
   let value: any;
 
-  docSnap.forEach((doc) => {
-    const data = doc.data() as IUserDetailsWaterByDate;
-    if (data.userId === userId && data.date === date) {
-      value = data;
-    }
-  });
+  if (docSnap.docs.length === 0) {
+    console.log("Sem dados ainda");
+  } else {
+    docSnap.forEach((doc) => {
+      const data = doc.data() as IUserDetailsWaterByDate;
+      if (data.userId === userId && data.date === date) {
+        value = {
+          ...data,
+          id: doc.id,
+        };
+      }
+    });
+  }
 
   if (value?.userId) {
     return value as IUserDetailsWaterByDate;

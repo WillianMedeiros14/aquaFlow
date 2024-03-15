@@ -12,12 +12,12 @@ import {
   where,
   query,
   onSnapshot,
+  updateDoc,
 } from "firebase/firestore";
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  updateEmail,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -54,4 +54,5 @@ export {
   getDocs,
   query,
   onSnapshot,
+  updateDoc,
 };
