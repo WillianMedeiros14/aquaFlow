@@ -7,6 +7,7 @@ import {
 import Onboarding from "@features/onboarding/screens/Onboarding";
 import SignIn from "@features/auth/screens/SignIn";
 import SignUp from "@features/auth/screens/SignUp";
+import ForgotPassword from "@features/auth/screens/ForgotPassword";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ export default function AuthRoutes() {
       <Screen name="Onboarding" component={Onboarding} />
       <Screen name="SignIn" component={SignIn} />
       <Screen name="SignUp" component={SignUp} />
+      <Screen name="ForgotPassword" component={ForgotPassword} />
       {/* <Screen name="TermsOfUse" component={TermsOfUse} />
       <Screen name="PrivacyPolicies" component={PrivacyPolicies} /> */}
     </Navigator>

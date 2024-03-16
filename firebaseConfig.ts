@@ -19,6 +19,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -57,4 +58,5 @@ export {
   onSnapshot,
   updateDoc,
   signOut,
+  sendPasswordResetEmail,
 };

@@ -38,7 +38,9 @@ export default function SignIn() {
   function ComponentBottom() {
     return (
       <S.Container>
-        <S.ButtonForgotPassword>
+        <S.ButtonForgotPassword
+          onPress={() => navigation.navigate("ForgotPassword")}
+        >
           <Text
             variant="Poppins_400Regular"
             fontSize={12}
