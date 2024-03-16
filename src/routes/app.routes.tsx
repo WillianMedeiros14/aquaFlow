@@ -125,14 +125,14 @@ export function AppRoutesTabs() {
         }}
       />
 
-      <Screen
+      {/* <Screen
         name="AlarmScreenTab"
         component={HomeScreen}
         options={{
           headerShown: false,
           tabBarShowLabel: false,
         }}
-      />
+      /> */}
 
       <Screen
         name="SettingsScreenTab"

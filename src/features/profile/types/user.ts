@@ -11,7 +11,7 @@ export interface IUser {
   weight: string;
   height: string;
   timeToWakeUp: Date;
-  timeToSleep: Date;
+  timeToSleep: any;
 
   dailyAmountOfWater?: number;
   rangeOfWakingHours?: number;

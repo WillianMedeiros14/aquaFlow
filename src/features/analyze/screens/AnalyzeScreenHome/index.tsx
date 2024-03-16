@@ -18,7 +18,24 @@ export function AnalyzeHomeScreen() {
     userId: user?.uid,
   });
 
-  console.log(data?.timeToSleep);
+  function formatTimeToSleep() {
+    if (data?.timeToSleep) {
+      const timestampInSeconds = data.timeToSleep.seconds;
+      const dateObject = new Date(timestampInSeconds * 1000);
+
+      const hour = dateObject.getHours();
+      const minute = dateObject.getMinutes();
+
+      return `${hour}:${minute < 10 ? "0" + minute : minute}`;
+    } else {
+      return `Hora não informadada pelo usuário`;
+    }
+  }
+
+  function mlToLiters(ml: number) {
+    const liters = ml / 1000;
+    return liters;
+  }
 
   return (
     <S.Container>
@@ -35,14 +52,12 @@ export function AnalyzeHomeScreen() {
       </Text>
 
       <S.ContainerTitle>
-        {/* Consumo de Agua */}
         <S.ViewConsumption>
           <BackGroundAddConsumptionHomeSvg
             width={width - 100}
             height={scale(300)}
           />
 
-          {/* Visualizar Consumo de Agua */}
           <S.ViewConsumptionWater>
             <S.ContainerConsumptionText>
               <Text
@@ -56,13 +71,12 @@ export function AnalyzeHomeScreen() {
               <Grafico />
 
               <Text variant="Poppins_500Medium" fontSize={18} color="white">
-                2.1 litros
+                {mlToLiters(data?.dailyAmountOfWater)} litros
               </Text>
             </S.ContainerConsumptionText>
           </S.ViewConsumptionWater>
         </S.ViewConsumption>
 
-        {/* Dormir */}
         <S.ViewConsumption>
           <S.ViewConsumptionWater>
             <S.ContainerConsumptionText>
@@ -77,15 +91,18 @@ export function AnalyzeHomeScreen() {
                 <Text
                   variant="Poppins_600SemiBold"
                   fontSize={25}
-                  color="grayText"
+                  color="primary"
                 >
-                  08:00
+                  {formatTimeToSleep()}
                 </Text>
 
                 <Text
                   variant="Poppins_500Medium"
                   fontSize={14}
                   color="grayText"
+                  style={{
+                    marginTop: -10,
+                  }}
                 >
                   horas
                 </Text>
