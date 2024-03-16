@@ -1,6 +1,7 @@
 import { queryClient } from "@global/config/react-query";
 import { ILoggedInUserContext } from "@global/types/loggedInUserContext";
 import { create } from "zustand";
+import * as SecureStore from "expo-secure-store";
 
 interface IAuthStore {
   user: ILoggedInUserContext;
@@ -22,20 +23,24 @@ interface IAuthStore {
 export const useAuth = create<IAuthStore>((set, get) => ({
   user: {
     uid: "",
+    isVerification: false,
   },
 
   setUser: async (input, keepConnected) => {
     set(() => ({ user: input }));
     if (keepConnected) {
-      //fazer o usuario permanencer logado
+      await SecureStore.setItemAsync("AquaFLow.user", JSON.stringify(input));
     }
   },
 
   logOut: async () => {
+    await SecureStore.deleteItemAsync("AquaFLow.user");
+
     queryClient.clear();
     set(() => ({
       user: {
         uid: "",
+        isVerification: false,
       },
     }));
   },

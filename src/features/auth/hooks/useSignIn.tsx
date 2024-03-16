@@ -67,7 +67,7 @@ export function useSignIn() {
         {
           uid: idUser,
         },
-        false
+        true
       );
     }
   }, [data, isLoading, isRefetching, idUser, setUser]);

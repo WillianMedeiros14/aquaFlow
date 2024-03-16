@@ -37,19 +37,31 @@ export type AppScreenNavigationProp =
 
 export default function AppRoutes() {
   const user = useAuth((state) => state.user);
+  const setUser = useAuth((state) => state.setUser);
 
   const { data, isLoading, isRefetching } = useGetUserDetails({
     userId: user?.uid,
     isEnabled: true,
   });
 
+  let userValue = {
+    uid: user.uid,
+    isVerification: true,
+  };
+
   const verify = useMemo(() => {
-    if (data?.gender !== undefined && data?.gender !== null) {
+    if (user.isVerification === true) {
       return true;
     } else {
-      return false;
+      if (data?.gender !== undefined && data?.gender !== null) {
+        setUser(userValue, true);
+        return true;
+      } else {
+        setUser({ ...userValue, isVerification: false }, true);
+        return false;
+      }
     }
-  }, [data, isLoading, isRefetching]);
+  }, [data, isLoading, isRefetching, user.isVerification]);
 
   if (!verify) {
     return (

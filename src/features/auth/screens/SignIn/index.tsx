@@ -23,8 +23,6 @@ export default function SignIn() {
 
   const { mutate, isPending, control, handleSubmit, errors } = useSignIn();
 
-  const [errorLogin, setErrorLogin] = useState("");
-
   const onSubmit = async (dataForm: ISignIn) => {
     const dataSend = {
       email: dataForm.email.trim(),

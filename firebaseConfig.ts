@@ -20,6 +20,9 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  onAuthStateChanged,
+  initializeAuth,
+  getReactNativePersistence,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -34,9 +37,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth();
+// const auth = getAuth();
 
 const db = getFirestore(app);
+
+import ReactNativeAsyncStorage, {
+  AsyncStorageStatic,
+} from "@react-native-async-storage/async-storage";
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(ReactNativeAsyncStorage),
+});
 
 export {
   getStorage,
@@ -59,4 +69,5 @@ export {
   updateDoc,
   signOut,
   sendPasswordResetEmail,
+  onAuthStateChanged,
 };

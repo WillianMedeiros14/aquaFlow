@@ -18,21 +18,21 @@ import { ThemeProvider } from "styled-components";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { SplashScreen } from "@features/SplashSccreen";
 import { useEffect, useState } from "react";
+import * as SecureStore from "expo-secure-store";
 
 import { NavigationContainer } from "@react-navigation/native";
 import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
-import Onboarding from "@features/onboarding/screens/Onboarding";
-import SignIn from "@features/auth/screens/SignIn";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "@global/config/react-query";
 import Toast from "react-native-toast-message";
-import SignUp from "@features/auth/screens/SignUp";
 import Routes from "routes";
-import CompleteProfileHome from "@features/completeProfile/screens/CompleteProfileHome";
-import { HomeScreen } from "@features/home/screens/HomeScreen";
+
+import { ILoggedInUserContext } from "@global/types/loggedInUserContext";
+import { useAuth } from "@global/context/useAuth";
+import { auth, onAuthStateChanged } from "./firebaseConfig";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -46,26 +46,41 @@ const App = () => {
     Inter_700Bold,
   });
 
+  const setUser = useAuth((state) => state.setUser);
+
   const [isLoading, setIsLoading] = useState(true);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // O usuário está autenticado
+      console.log("Usuário autenticado:", user.uid);
+      // Redirecione para a tela principal
+    } else {
+      // O usuário não está autenticado
+      console.log("Usuário não autenticado.");
+      // Redirecione para a tela de login
+    }
+  });
 
   async function loadUser() {
     setIsLoading(true);
     try {
-      // const storedUser = await SecureStore.getItemAsync("alimenteSeBem.user");
-      // if (storedUser) {
-      //   // const user = JSON.parse(storedUser) as IUser;
-      //   // setUser(user, true);
-      //   setIsLoading(false);
-      // } else {
-      //   setIsLoading(false);
-      // }
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 10000);
+      const storedUser = await SecureStore.getItemAsync("AquaFLow.user");
+      if (storedUser) {
+        const user = JSON.parse(storedUser) as ILoggedInUserContext;
+        setUser(user, true);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 5000);
+      } else {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 5000);
+      }
     } catch (error) {
       setTimeout(() => {
         setIsLoading(false);
-      }, 10000);
+      }, 5000);
     }
   }
 

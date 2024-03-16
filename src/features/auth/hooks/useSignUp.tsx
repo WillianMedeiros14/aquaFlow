@@ -46,8 +46,9 @@ export function useSignUp() {
       setUser(
         {
           uid: data.user.uid,
+          isVerification: false,
         },
-        false
+        true
       );
     },
     onError: (error, variables, context) => {

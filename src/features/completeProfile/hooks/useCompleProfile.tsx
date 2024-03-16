@@ -14,6 +14,7 @@ import { useGetUserDetails } from "@features/profile/hooks/useGetUserDetails";
 
 export function useCompleteProfile() {
   const user = useAuth((state) => state.user);
+  const setUser = useAuth((state) => state.setUser);
 
   const { data, isRefetching, refetch } = useGetUserDetails({
     userId: user?.uid,
@@ -36,6 +37,14 @@ export function useCompleteProfile() {
     },
     onSuccess: (data) => {
       refetch();
+      setUser(
+        {
+          uid: user.uid,
+          isVerification: true,
+        },
+        true
+      );
+
       Toast.show({
         text1: "Perfil completado com sucesso!",
       });

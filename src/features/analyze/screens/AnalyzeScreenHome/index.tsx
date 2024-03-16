@@ -12,17 +12,15 @@ import { useGetUserDetails } from "@features/profile/hooks/useGetUserDetails";
 const { width } = Dimensions.get("window");
 
 export function AnalyzeHomeScreen() {
-   const user = useAuth((state) => state.user);
+  const user = useAuth((state) => state.user);
 
   const { data, isLoading, refetch } = useGetUserDetails({
     userId: user?.uid,
   });
 
-  console.log(data?.timeToSleep.toDateString());
+  console.log(data?.timeToSleep);
 
-   return (
-
-
+  return (
     <S.Container>
       <StatusBar barStyle={"dark-content"} backgroundColor={"#f4f8fb"} />
 
@@ -82,7 +80,7 @@ export function AnalyzeHomeScreen() {
                   color="grayText"
                 >
                   08:00
-               </Text>
+                </Text>
 
                 <Text
                   variant="Poppins_500Medium"
