@@ -16,6 +16,7 @@ import RightArrowSvg from "./rightArrow.svg";
 import SvgDelete from "./delete.svg";
 import UserDefaultSvg from "./userDefault.svg";
 import NotificationSvg from "./notification.svg";
+import Grafico from "./Grafico.svg";
 
 export {
   DropLogoSvg,
@@ -36,4 +37,5 @@ export {
   SvgDelete,
   UserDefaultSvg,
   NotificationSvg,
+  Grafico
 };
