@@ -18,6 +18,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -55,4 +56,5 @@ export {
   query,
   onSnapshot,
   updateDoc,
+  signOut,
 };

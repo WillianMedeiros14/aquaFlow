@@ -25,7 +25,7 @@ export type ModalInfoHandler = Modalize;
 
 type Props = {
   title: string;
-  icon: TypeIconDelete;
+  icon?: TypeIconDelete;
   description?: string;
   textButton: string;
   textButtonSecondary?: string;
@@ -67,7 +67,8 @@ const ModalInfo: ForwardRefRenderFunction<ModalInfoHandler, Props> = (
     >
       <Container>
         <Content>
-          {iconsModalInfo[icon]}
+          {icon && iconsModalInfo[icon]}
+
           <Spacer height={19.5} />
 
           <Text variant="Poppins_700Bold" fontSize={16} textAlign="center">

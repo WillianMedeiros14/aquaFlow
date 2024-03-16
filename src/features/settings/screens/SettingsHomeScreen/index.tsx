@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import * as S from "./styles";
 import { Header } from "@global/components/Header";
@@ -10,9 +10,33 @@ import { LineSeparate } from "@features/settings/components/LineSeparate";
 import { Spacer } from "@global/components/Spacer";
 import { useDeleteUserAndData } from "@features/settings/hooks/useDeleteUserAndData";
 import { useAuth } from "@global/context/useAuth";
+import ModalInfo, { ModalInfoHandler } from "@global/components/ModalInfo";
+import { auth, signOut } from "../../../../../firebaseConfig";
+import Toast from "react-native-toast-message";
 
 export default function SettingsHomeScreen() {
   const navigation = useNavigation();
+  const logOut = useAuth((state) => state.logOut);
+
+  const modalSignOutRef = useRef<ModalInfoHandler>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function handleSignOut() {
+    setIsLoading(true);
+    signOut(auth)
+      .then(() => {
+        logOut();
+        setIsLoading(false);
+        modalSignOutRef.current?.close();
+      })
+      .catch((error) => {
+        Toast.show({
+          text1: "Erro ao sair da aplicação",
+          type: "error",
+        });
+        setIsLoading(false);
+      });
+  }
 
   return (
     <S.Container>
@@ -38,7 +62,23 @@ export default function SettingsHomeScreen() {
           }
         />
         <LineSeparate />
+
+        <ButtonOptionSettings
+          colorText="red"
+          title="Sair"
+          onPress={() => modalSignOutRef.current?.open()}
+        />
+
+        <LineSeparate />
       </S.ScrollView>
+
+      <ModalInfo
+        ref={modalSignOutRef}
+        title={`Tem certeza que deseja sair da aplicação?\nPara usar novamente será necessrário entrar com seu email e senha.`}
+        textButton="Confirmar"
+        onPress={handleSignOut}
+        isLoad={isLoading}
+      />
     </S.Container>
   );
 }
