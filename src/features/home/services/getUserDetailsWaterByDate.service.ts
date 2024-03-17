@@ -1,3 +1,4 @@
+import { useAuth } from "@global/context/useAuth";
 import {
   collection,
   db,
@@ -6,18 +7,29 @@ import {
   getDocs,
   onSnapshot,
   query,
+  setDoc,
   where,
 } from "../../../../firebaseConfig";
 import { IUserDetailsWaterByDate } from "../types/infoWater";
+import {
+  calculateTheNextTimeToDrinkWater,
+  calculateWaterDistribution,
+  dailyAmountOfWater,
+  rangeOfWakingHours,
+} from "@global/utils/calculatingDailyGoals";
+import { IDataSendHistoricUser } from "@features/completeProfile/types/completeProfile";
+import { queryClient } from "@global/config/react-query";
 
 export interface IGetUserDetailsWaterByDateServiceProps {
   userId: string;
   date: string;
+  dataHistoric?: IDataSendHistoricUser;
 }
 
 export async function getUserDetailsWaterByDateService({
   userId,
   date,
+  dataHistoric,
 }: IGetUserDetailsWaterByDateServiceProps) {
   const docRef = collection(db, "historic");
 
@@ -32,7 +44,12 @@ export async function getUserDetailsWaterByDateService({
   let value: any;
 
   if (docSnap.docs.length === 0) {
-    console.log("Sem dados ainda");
+    // console.log("Sem dados ainda", dataHistoric);
+    const historicRef = doc(collection(db, "historic"));
+
+    await setDoc(historicRef, { ...dataHistoric });
+
+    return "create";
   } else {
     docSnap.forEach((doc) => {
       const data = doc.data() as IUserDetailsWaterByDate;

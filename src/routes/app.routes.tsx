@@ -54,7 +54,7 @@ export default function AppRoutes() {
       return true;
     } else {
       if (data?.gender !== undefined && data?.gender !== null) {
-        setUser(userValue, true);
+        setUser({ ...userValue }, true);
         return true;
       } else {
         setUser({ ...userValue, isVerification: false }, true);
