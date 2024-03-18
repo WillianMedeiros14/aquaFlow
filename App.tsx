@@ -32,7 +32,6 @@ import Routes from "routes";
 
 import { ILoggedInUserContext } from "@global/types/loggedInUserContext";
 import { useAuth } from "@global/context/useAuth";
-import { auth, onAuthStateChanged } from "./firebaseConfig";
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -49,18 +48,6 @@ const App = () => {
   const setUser = useAuth((state) => state.setUser);
 
   const [isLoading, setIsLoading] = useState(true);
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // O usuário está autenticado
-      console.log("Usuário autenticado:", user.uid);
-      // Redirecione para a tela principal
-    } else {
-      // O usuário não está autenticado
-      console.log("Usuário não autenticado.");
-      // Redirecione para a tela de login
-    }
-  });
 
   async function loadUser() {
     setIsLoading(true);
