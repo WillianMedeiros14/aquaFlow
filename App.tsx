@@ -12,13 +12,13 @@ import {
   Inter_600SemiBold,
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
+import * as SecureStore from "expo-secure-store";
 
 import theme from "./src/theme/theme/theme";
 import { ThemeProvider } from "styled-components";
 import { gestureHandlerRootHOC } from "react-native-gesture-handler";
 import { SplashScreen } from "@features/SplashSccreen";
 import { useEffect, useState } from "react";
-import * as SecureStore from "expo-secure-store";
 
 import { NavigationContainer } from "@react-navigation/native";
 import {
