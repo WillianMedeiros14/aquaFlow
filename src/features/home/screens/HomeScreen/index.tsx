@@ -43,7 +43,7 @@ export function HomeScreen() {
   const currentDateValue = new Date().toISOString().split("T")[0];
 
   function getDataHistoric(user: IUser, uid: string) {
-    if (uid !== "") {
+    if (uid !== "" && user?.dailyAmountOfWater) {
       const resultDailyAmountOfWater = dailyAmountOfWater({
         weight: user.weight.trim(),
       });
@@ -95,8 +95,8 @@ export function HomeScreen() {
   } = useGetUserDetailsWaterByDate({
     date: currentDateValue,
     userId: user?.uid,
-
-    dataHistoric: getDataHistoric(user as unknown as IUser, user.uid),
+    enabled: data?.gender && true,
+    dataHistoric: getDataHistoric(data as unknown as IUser, user.uid),
   });
 
   const { mutate, isPending } = useAddingWaterConsumption();
@@ -124,7 +124,7 @@ export function HomeScreen() {
   }
 
   const dataAll = useMemo(() => {
-    if (dataWater === "create") {
+    if (dataWater === "create" && data?.gender) {
       setTimeout(() => {
         queryClient.invalidateQueries({
           queryKey: [
@@ -136,7 +136,7 @@ export function HomeScreen() {
         refetch();
       }, 500);
     }
-  }, [dataWater, user.uid, isPending]);
+  }, [dataWater, user.uid, isPending, data]);
 
   return (
     <S.Container>
@@ -161,7 +161,7 @@ export function HomeScreen() {
           <Load text="Criando meta do dia" />
         ) : (
           <>
-            {isLoadingWater ? (
+            {isLoadingWater || isLoading ? (
               <Load />
             ) : (
               <>
@@ -243,7 +243,7 @@ export function HomeScreen() {
 
                   <Spacer height={30} />
 
-                  <Button title="Ir para a dashboard" height={48} />
+                  {/* <Button title="Ir para a dashboard" height={48} /> */}
 
                   <Text
                     variant="Poppins_500Medium"

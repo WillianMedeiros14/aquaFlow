@@ -24,6 +24,7 @@ export interface IGetUserDetailsWaterByDateServiceProps {
   userId: string;
   date: string;
   dataHistoric?: IDataSendHistoricUser;
+  enabled?: boolean;
 }
 
 export async function getUserDetailsWaterByDateService({

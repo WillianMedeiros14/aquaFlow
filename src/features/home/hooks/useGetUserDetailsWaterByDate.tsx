@@ -8,6 +8,7 @@ export function useGetUserDetailsWaterByDate({
   userId,
   date,
   dataHistoric,
+  enabled = false,
 }: IGetUserDetailsWaterByDateServiceProps) {
   return useQuery({
     queryKey: ["keyGetUserDetailsWaterByDate", userId, date],
@@ -17,5 +18,6 @@ export function useGetUserDetailsWaterByDate({
         userId,
         dataHistoric,
       }),
+    enabled: enabled,
   });
 }
