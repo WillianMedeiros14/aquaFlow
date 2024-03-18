@@ -4,14 +4,13 @@ import styled from "styled-components/native";
 export const Container = styled.View`
   flex: 1;
   padding-top: ${scale(30)}px;
-
 `;
 
 export const ContainerTitle = styled.View`
-   flex-direction: row;
-   justify-content: space-around;
-   padding-top:20;
-   flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 20px;
+  flex-wrap: wrap;
 `;
 
 export const ViewConsumption = styled.View`
@@ -35,6 +34,6 @@ export const ViewConsumptionWater = styled.View`
 `;
 
 export const ContainerConsumptionText = styled.View`
-   flex: 1;
-   justify-content: space-between;
+  flex: 1;
+  justify-content: space-between;
 `;

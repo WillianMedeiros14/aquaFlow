@@ -13,6 +13,7 @@ import {
 
 export interface IAddingWaterConsumptionServiceServiceProps {
   id: string;
+  dailyAmountOfWater?: number;
   data: {
     amountOfWaterConsumed: number;
     nextTimeToDrinkWater: string;

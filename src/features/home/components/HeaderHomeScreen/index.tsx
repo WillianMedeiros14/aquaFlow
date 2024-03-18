@@ -26,11 +26,11 @@ export function HeaderHomeScreen() {
         </Text>
       </S.ContentLeft>
 
-      <S.ButtonNotification>
+      {/* <S.ButtonNotification>
         <NotificationSvg width={scale(20)} height={scale(20)} />
 
         <S.InfoNotification />
-      </S.ButtonNotification>
+      </S.ButtonNotification> */}
     </S.Container>
   );
 }

@@ -42,8 +42,8 @@ export function HomeScreen() {
 
   const currentDateValue = new Date().toISOString().split("T")[0];
 
-  function getDataHistoric(user: IUser) {
-    if (user?.uid !== "") {
+  function getDataHistoric(user: IUser, uid: string) {
+    if (uid !== "") {
       const resultDailyAmountOfWater = dailyAmountOfWater({
         weight: user.weight.trim(),
       });
@@ -77,7 +77,7 @@ export function HomeScreen() {
         waterDistributionOnTheDay: resultWaterDistributionOnTheDay,
         amountOfWaterConsumed: 0,
         date: currentDateValue,
-        userId: user.uid as string,
+        userId: uid,
         nextTimeToDrinkWater: resultNextTimeToDrinkWater,
       };
 
@@ -96,13 +96,13 @@ export function HomeScreen() {
     date: currentDateValue,
     userId: user?.uid,
 
-    dataHistoric: getDataHistoric(user as unknown as IUser),
+    dataHistoric: getDataHistoric(user as unknown as IUser, user.uid),
   });
 
   const { mutate, isPending } = useAddingWaterConsumption();
 
   function onAddConsumption() {
-    if (dataWater) {
+    if (dataWater && dataWater !== "create") {
       const nextTimeToDrinkWater = calculateNextHourWater(
         dataWater?.nextTimeToDrinkWater as string
       );
@@ -112,6 +112,7 @@ export function HomeScreen() {
 
       const dataSend: IAddingWaterConsumptionServiceServiceProps = {
         id: dataWater.id,
+        dailyAmountOfWater: dataWater?.dailyAmountOfWater,
         data: {
           amountOfWaterConsumed: parseFloat(amountOfWaterConsumed.toFixed(2)),
           nextTimeToDrinkWater,

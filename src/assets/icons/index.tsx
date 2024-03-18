@@ -17,6 +17,11 @@ import SvgDelete from "./delete.svg";
 import UserDefaultSvg from "./userDefault.svg";
 import NotificationSvg from "./notification.svg";
 import Grafico from "./Grafico.svg";
+import HappyEmojiSvg from "./happy-emoji.svg";
+
+import GoldTrophyInAirSvg from "./GoldTrophyInAir.svg";
+import GoldTrophyInAirPng from "./GoldTrophyInAir.png";
+import ConfettiPng from "./confetti.png";
 
 export {
   DropLogoSvg,
@@ -37,5 +42,9 @@ export {
   SvgDelete,
   UserDefaultSvg,
   NotificationSvg,
-  Grafico
+  Grafico,
+  HappyEmojiSvg,
+  GoldTrophyInAirSvg,
+  GoldTrophyInAirPng,
+  ConfettiPng,
 };

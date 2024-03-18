@@ -8,8 +8,11 @@ import {
 } from "../services/addingWaterConsumption.service";
 import { queryClient } from "@global/config/react-query";
 import { useAuth } from "@global/context/useAuth";
+import { useNavigation } from "@react-navigation/native";
+import { AppScreenNavigationProp } from "routes/app.routes";
 
 export function useAddingWaterConsumption() {
+  const navigation = useNavigation<AppScreenNavigationProp>();
   const user = useAuth((state) => state.user);
 
   const userId = user?.uid;
@@ -20,14 +23,21 @@ export function useAddingWaterConsumption() {
     mutationFn: (data: IAddingWaterConsumptionServiceServiceProps) => {
       return addingWaterConsumptionService(data);
     },
-    onSuccess: (data) => {
-      Toast.show({
-        text1: "Consumo salvo",
-      });
-
+    onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
         queryKey: ["keyGetUserDetailsWaterByDate", userId, date],
       });
+
+      if (
+        variables?.dailyAmountOfWater &&
+        variables.data.amountOfWaterConsumed >= variables?.dailyAmountOfWater
+      ) {
+        navigation.navigate("WaterIntakeStatus");
+      } else {
+        Toast.show({
+          text1: "Consumo salvo",
+        });
+      }
     },
     onError: (e, variables, context) => {
       const { message, name, cause, stack } = e;
