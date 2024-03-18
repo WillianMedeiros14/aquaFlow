@@ -15,8 +15,8 @@ import theme from "@theme/theme/theme";
 
 const { width } = Dimensions.get("window");
 
-const TAB_BAR_WIDTH = width / 5;
-const ANIMATED_PART_HEIGHT = 5;
+const TAB_BAR_WIDTH = width / 4;
+const ANIMATED_PART_HEIGHT = 4;
 
 const TabBar = ({ state, descriptors, navigation }) => {
   const animationHorizontalValue = useRef(new Animated.Value(0)).current;
